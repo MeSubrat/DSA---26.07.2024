@@ -42,12 +42,18 @@ int SumOfSubArrMin(vector<int>&arr)
     int sum=0;
     vector<int> nse=NSEIdx(arr);
     vector<int> pse=PSEIdx(arr);
+    int mod=(int)1e9+7;
     for(int i=0;i<arr.size();i++)
     {
         int left=i-pse[i];
         int right=nse[i]-i;
 
-        sum=sum+(left*right*arr[i]);
+        // sum=(sum+(left*right*arr[i]*1LL )%mod)%mod;
+
+        long long product = (static_cast<long long>(left) * right) % mod;
+        product = (product * arr[i]) % mod;
+
+        sum = (sum + product) % mod;
     }
     return sum;
 }
